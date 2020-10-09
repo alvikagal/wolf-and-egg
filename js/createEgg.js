@@ -91,7 +91,7 @@ function createBall(poz) {
 			}
 			else {	// если нет, то убираем одну жизнь
 
-				// quantityLifes = quantityLifes - 1;
+				quantityLifes = quantityLifes - 1;
 				if (ball.className == "egg-left-top" || ball.className == "egg-left-bottom") {
 					crashEgg("broken-egg-left");
 				}
@@ -140,7 +140,7 @@ function crashEgg(side) {
 	let step = 0;
 	var broken = document.createElement("div"); //создаем блок div
 	broken.className = side;	// присваиваем класс
-	game.appendChild(broken);//добавляем елемент шарик в игровое поле
+	game.appendChild(broken);//добавляем елемент цыпленок в игровое поле
 	var timerBroken = setInterval(function() {
 		if (step == 1) {
 			broken.style.top = broken.offsetTop + 2 + "px"; //слева на 10px
@@ -173,14 +173,12 @@ function crashEgg(side) {
 }
 // каждые 50 очков прибавляем жизнь и замедляем
 function scoreLifes() {
-	if(countEgg >= 1) {
+	if(countEgg >= 50) {
 		countEgg = 1;	
 		quantityLifes++;
 		addLifes();
-		setTimeout(function() {
-			deleteLifes();
-			createLifes();		
-		}, 750)
+		deleteLifes();
+		createLifes();		
 		speedEgg = 200;
 	}
 	else {
@@ -191,9 +189,6 @@ function scoreLifes() {
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-
-
 
 // для создания нового яйца меняем растояние между ними
 // и уменьшаем таймер между созданием яиц
