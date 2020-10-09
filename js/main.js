@@ -4,7 +4,6 @@
 function start(){
 	//Вызываем функцию создания стартового блока
 	createStartGameBlock();
-
 	// Создаем блок правил
 	createRules();
 	// создаем блок выключения музыки
@@ -55,6 +54,8 @@ function gameEnd(){
 	musicOff();
 	// заново созаем кнопку музыки
 	createSoundBlock();
+	// Создаем блок правил
+	createRules();
 	// передаем в функцию музыку для конца игры
 	musicOn("audio/end.mp3");
 	// создаем блок конца игры
