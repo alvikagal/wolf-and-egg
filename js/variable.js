@@ -37,3 +37,5 @@ var egg = null;
 var endBlock = null;
 // глобальная переменная для кнопки рестарта
 var restartBtn = null;
+// глобальная переменная, для включеного или выключеного звука
+var 	varSoung = "on";

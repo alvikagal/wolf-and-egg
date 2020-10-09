@@ -464,7 +464,6 @@ body{
 	border: 1px solid #f7a000;
 	background: #fff;
 	border-radius: 50%;
-	/* z-index: 5; */
 }
 /* Позиционируем яйца */
 .egg-left-top{
@@ -499,4 +498,26 @@ body{
 	background: url('../img/dead.png') 0px 0px /cover no-repeat;
 	border-radius: none;
 	z-index: 6;
+}
+.egg-green{
+	position: absolute;
+	width: 25px;
+  	height: 40px;
+  	-webkit-box-shadow: inset 0px -20px 30px -15px  rgb(50, 223, 15);
+	-moz-box-shadow: inset 0px -20px 30px -15px  rgb(50, 223, 15);
+	box-shadow: inset 0px -20px 30px -15px  rgb(50, 223, 15);
+	border: 1px solid  rgb(50, 223, 15);
+	background: #fff;
+	border-radius: 50%;
+}
+.egg-green{
+	position: absolute;
+	width: 25px;
+  	height: 40px;
+  	-webkit-box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
+	-moz-box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
+	box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
+	border: 1px solid  rgb(223, 15, 15);
+	background: #fff;
+	border-radius: 50%;
 }

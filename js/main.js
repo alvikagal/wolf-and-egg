@@ -4,6 +4,7 @@
 function start(){
 	//Вызываем функцию создания стартового блока
 	createStartGameBlock();
+
 	// Создаем блок правил
 	createRules();
 	// создаем блок выключения музыки
@@ -15,7 +16,7 @@ function start(){
 // функция старта игры
 function createGame(){
 	// запускаем музыку игры
-	musicOn(song);
+	musicOn("audio/pole.mp3");
 	// удаляем блок начала игры
 	deleteStartBlock();
 	// создаем счет
@@ -28,14 +29,10 @@ function createGame(){
 	createWolf();
 	// создаем блок куриц
 	createHens();
-	// создаем яйцо
-//	createEgg();
 	// запускаем таймер
-//	startTimer();
+	// startInterval();
 
-//	createBall();
-// startInterval();
-	 randomPozition();
+	randomPozition();
 	// считываем кнопки с клавы (при нажатии на клавишу вызыем функцию)
 	document.onkeydown = checkKey;
 }
@@ -52,14 +49,16 @@ function gameEnd(){
 	deleteWolf();
 	// удаляем блок куриц
 	deleteHen();
-	// удаляем яйцо
-	// deleteEgg();
-	// убираем музыку игры
+	// очищаем поле от яиц
+	gameFild();
+	// выключаем звук который создан для игры
 	musicOff();
+	// заново созаем кнопку музыки
+	createSoundBlock();
+	// передаем в функцию музыку для конца игры
+	musicOn("audio/end.mp3");
 	// создаем блок конца игры
 	createEndGameBlock();
-	// убираем красный у звука
-	restartSong();
 	// при клике на рестарт вызываем функцию рестарта
 	restartBtn.onclick = restartGame;
 }
@@ -72,8 +71,10 @@ function restartGame(){
 	deleteEndGameBlock();
 	// обнуляем переменные
 	recountVariables();
+	// Создаем блок правил
+	createRules();
 	// запускаем старт
-	start();
+	createGame();
 }
 
 // запуск таймера

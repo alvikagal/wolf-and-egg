@@ -1,8 +1,5 @@
 // Это файл для вызова всех функций проекта, они должены идти сразу же после оглашения переменных
 
-//Стрелочная функция рандомного числа
-var random = (max , min) =>  Math.floor(Math.random() * (max - min + 1)) + min; 
-
 // /* =======================================
 // Функции для создания игры
 // =======================================*/
@@ -77,12 +74,23 @@ function createRules(){
 function createSoundBlock(){
 	// создаем блок для звука
 	soundBtn = document.createElement("div");
+	// при создании блока, проверяем выключил ли пользватель звук
+	if(varSoung == "on"){
+		// если звук не выключен, стили включеного звка
+		soundBtn.style.background = "url('img/sound.svg') center/ 70% no-repeat";
+	}else{
+		// если пользователь отключил звук ранее, добаляем стили выключеного звука
+		soundBtn.style.background = "url('img/sound.svg') center/ 70% no-repeat, red";
+	}
 	// присвиваем ему айди
 	soundBtn.id = "sound";
 	// добавляем этот блок в поле игры
 	game.appendChild(soundBtn);
-	// присваиваем значение песни (путь к файлу)
-	song = "audio/pole.mp3"
+	// ппри клике на кнопку вызываем функцию включения выключения музыки
+	soundBtn.onclick = function(){
+		// передаем нашу песню туда
+		onOffMusic();
+	}
 }
 
 // функиця создания блока очков
@@ -250,17 +258,6 @@ function createRightBottomHen(){
 	rightBottom.onmouseover = wolfRightBottom;
 }
 
-// функция создания яйца
-function createEgg(){
-	// создаем бблок для яйца
-	egg = document.createElement("div");
-	// добавляем блоку яйца айди
-	egg.id = "egg";
-	// задаем яйцу класс
-	egg.className = "egg egg-left-bottom";
-	// добавляем яйцо в игру
-	game.appendChild(egg);
-}
 
 // функция создания заставки конца игры
 function createEndGameBlock(){
@@ -296,9 +293,6 @@ function createEndGameBlock(){
 	restartBtn.innerHTML = "З<span>а</span><span>н</span><span>о</span><span>в</span><span>о</span><span>!</span>";
 	// добавляем кнопку в конце игры
 	endBlock.appendChild(restartBtn);
-	// заменяем песню на песню конца
-	song = "audio/end.mp3";
-	musicOn(song);
 }
 
 // /* =======================================
@@ -312,34 +306,53 @@ function musicOn(song){
 	// Указываем путь к звуку "клика"
 	audio.src = song; 
 	// Автоматически запускаем
-//	audio.setAttribute("autoplay", "true");
-	// зацикливаем музыку
+	audio.setAttribute("autoplay", "true");
+		// зацикливаем музыку
 	audio.setAttribute("loop", "true");
-	// при клике на звук вырубаем вызываем функцию чтобы выключить его
-	soundBtn.onclick = function(){
-		// передаем нашу песню туда
-		onOffMusic(audio);
+	// громкость звука
+	audio.volume = 0.2;
+	// проверка глобальной перемннной, выключил ли пользователь звук? если да
+	if(varSoung == "on"){
+		// проигрываем песню
+		audio.play();
+	}else{
+		// если нет. тоесть офф, выключаем песню
+		audio.pause();
 	}
 }
 
-// функция для включения или выключения музыки
-function onOffMusic(audio){
-	// если есть класс (выключен), включаем музыку, и выключаем красный фон, убираем класс
-	if(soundBtn.className == "sound-off"){
-		audio.play();
-		soundBtn.style.background = "url('img/sound.svg') center/ 70% no-repeat";
-		soundBtn.className = "";
-	}else{
-		// если класса нет (значит музыка играет), вырубаем ее и меняем стили и класс
-		audio.pause();
+// функция для включения или выключения музыки (срабатывает при нажатии на блок звука)
+function onOffMusic(){
+	// глобальная переменная для проверки включен звук или выключен. 
+	// если звук включен 
+	if(varSoung == "on"){
+		// звук выключен везде
+		varSoung = "off";
+		// стили выклченого звука
 		soundBtn.style.background = "url('img/sound.svg') center/ 70% no-repeat, red";
-		soundBtn.className = "sound-off";
+		// аудио существует?
+		if(audio != null){
+			// если да, стивим его на паузу
+			audio.pause();
+		}
+	}else{
+		// включаем звук
+		varSoung = "on";
+		// меняем стили на вклченый звук
+		soundBtn.style.background = "url('img/sound.svg') center/ 70% no-repeat";
+		// если аудио существует, включаем его
+		if(audio != null){
+			audio.play();
+		}
 	}
 }
 
 // выключить музыку после окончания игры или блока конца игры
 function musicOff(){
-	audio.pause();
+	// усли музыка существует
+	if(audio != null){
+		audio.pause();
+	}
 }
 
 // /* =======================================
@@ -470,11 +483,15 @@ function recountVariables(){
 	gameScore = 0;
 	// жизни 3
 	quantityLifes = 3;
-	// звук убираем (если он был красный)
-	restartSong();
+	// обнуляем скорость
+	speedEgg = 200;
+	pxLeft = 410;
+	pxRight = 550;
+	pxLeftCreate = 400;
+	pxRightCreate = 570;
 }
 
-function restartSong(){
-	soundBtn.style.background = "url('img/sound.svg') center/ 70% no-repeat";
-	soundBtn.className = "";
+// фцнкция обнуления поля.
+function gameFild(){
+	game.innerHTML = "";
 }
