@@ -487,6 +487,50 @@ body{
     transform: rotate(720deg);
 }
 /* стили для разбитого яйца */
+.broken-egg-left{
+	position: absolute;
+	top: 500px;
+	left: 390px;
+	width: 40px;
+	height: 40px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border: none;
+	background: url('../img/chicken-left.png') 0px 0px /cover no-repeat;
+	border-radius: none;
+	z-index: 6;
+}
+.broken-egg-right{
+	position: absolute;
+	top: 500px;
+	left: 570px;
+	width: 40px;
+	height: 40px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border: none;
+	background: url('../img/chicken-right.png') 0px 0px /cover no-repeat;
+	border-radius: none;
+	z-index: 6;
+}
+/*добавление жизни*/
+#chicken{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: 50px;
+	left: 450px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border: none;
+	background: url('../img/live.svg') 0px 0px /cover no-repeat;
+	border-radius: none;
+	z-index: 6;
+}
+/* стили для разбитого яйца */
 .broken-egg{
 	position: absolute;
 	width: 55px;
