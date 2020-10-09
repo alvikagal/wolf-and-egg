@@ -38,6 +38,7 @@ function randomPozition() {
 // создаем шарики
 function createBall(poz) {
 //	if(quantityLifes>0) {
+	let isFall = 0;
 	var ball = document.createElement("div");	// переменная для создания блока div
 	ball.id = "egg";							// присваиваем id
 	ball.className = poz;						// добавляем тегу div => класс
@@ -60,7 +61,7 @@ function createBall(poz) {
 	    }
 		//==========================
 		// для создания следующего яйца делаем проверку, чтобы с одной стороны не было больше 1 яйца
-		// начальное 220 + шаг 5	400-4=399	|395 400 405|					400+6=406
+		// начальное 220 + шаг 5	400-1=399	|395 400 405|					400+6=406
 		if((ball.offsetLeft >= pxLeftCreate - 1 && ball.offsetLeft <= pxLeftCreate + 6)
 			// начальное 750 - шаг 5 570+1=571	|570 565 560|					570-6=564 
 			|| (ball.offsetLeft <= pxRightCreate + 1 && ball.offsetLeft >= pxRightCreate - 6)) {	
@@ -82,16 +83,24 @@ function createBall(poz) {
 				// громкость этого звука, половина
 				music.volume = 0.5;
 				scoreLifes();	// тут увеличиваем жизни
+				ball.remove();	//удаляем яйцо
 			}
 			else {	// если нет корзинки возле яйца, то убираем одну жизнь
-				quantityLifes = quantityLifes - 1;
+//				quantityLifes = quantityLifes - 1;
+				//======
+				if(isFall != 1){
+					quantityLifes--;
+				}
+				isFall = 1;
+				//======
+				fall(ball);
 				// проверяем с какой стороны должен убегать цыпленок, если слева яйцо, то 
-				if (ball.className == "egg-left-top" || ball.className == "egg-left-bottom") { 
-					crashEgg("broken-egg-left");	// функция анимации как убегает цыпленок влево
-				}
-				else {								// если справа яйцо, то 
-					crashEgg("broken-egg-right");	// функция анимации как убегает цыпленок влево
-				}
+				// if (ball.className == "egg-left-top" || ball.className == "egg-left-bottom") { 
+				// 	crashEgg("broken-egg-left");	// функция анимации как убегает цыпленок влево
+				// }
+				// else {								// если справа яйцо, то 
+				// 	crashEgg("broken-egg-right");	// функция анимации как убегает цыпленок влево
+				// }
 				deleteLifes();						// функция удаления блока жизней
 				createLifes();						// функция создания блока жизней
 			if (quantityLifes == 0){ 				// если жизни закончились, то
@@ -99,12 +108,28 @@ function createBall(poz) {
 				gameEnd();							// запуск коцна игры
 			}
 		}	// после того как яйцо дошло до края - удаляем его
-			ball.remove();	//удаляем яйцо
 			speedGame();	//меняем скорость с каждым новым яйцом
 			//=====================
 		}
 	}, speedEgg);	// переменная времени интервала
 //	}
+}
+
+// функция падаения
+function fall(egg){
+	var t = setInterval(() => {
+		egg.style.top = egg.offsetTop + 3 + "px"; // сверху на 3px
+		if(egg.offsetTop >= 500){
+			clearInterval(t);
+			egg.remove();
+
+			if(egg.className == "egg-left-top" || egg.className == "egg-left-bottom"){
+				crashEgg("broken-egg-left");
+			}else{
+				crashEgg("broken-egg-right");
+			}		
+		}
+	}, 10);
 }
 
 
