@@ -83,7 +83,10 @@ function createBall(poz) {
 				|| (wolf.className == "wolf-right-bottom" && ball.className == "egg-right-bottom")) {
 					gameScore++;	// если есть, то прибавляем очки
 				score.innerText = gameScore;	// выводим на экран
+				// при ловле яйца, воспроизводим звук
 				music.play();
+				// громкость этого звука, половина
+				music.volume = 0.5;
 				scoreLifes();	// тут увеличиваем жизни
 			}
 			else {	// если нет, то убираем одну жизнь
