@@ -471,6 +471,7 @@ function deleteScore(){
 function deleteTimer(){
 	// удаляем весь блок с таймером
 	timer.remove();
+	clearInterval(t);					// очищаем таймер
 	clearInterval(timerBall);			// очищаем таймер анимации яиц
 	clearTimeout(timerEgg);				// очищаем таймер создания яиц
 }
