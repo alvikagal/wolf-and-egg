@@ -31,7 +31,7 @@ function createGame(){
 	// запускаем таймер
 	startTimer();
 
-	randomPozition();
+	startPause();
 	// считываем кнопки с клавы (при нажатии на клавишу вызыем функцию)
 	document.onkeydown = checkKey;
 }
@@ -82,15 +82,18 @@ function restartGame(){
 function startTimer(){
 	// запускаем интервал в 1 сек
 	var t = setInterval(function(){
-		// отнимем 1 каждую секунду
-		time.innerText -= 1;
-		// если время 0, вызываем конец игры
-		if(time.innerText == 0){
-			// очищаем интервал
-			clearInterval(t);
-			// запуск коцна игры
-			gameEnd();
-		}
+		if(pause == 0) {
+			// отнимем 1 каждую секунду
+			time.innerText -= 1;
+			// если время 0, вызываем конец игры
+			if(time.innerText == 0){
+				// очищаем интервал
+				clearInterval(t);
+				// запуск коцна игры
+				gameEnd();
+			}
+		} // если нет паузы, то
+		
 		// интервал 1 сек
 	}, 1000);
 }
