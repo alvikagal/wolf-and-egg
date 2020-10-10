@@ -288,6 +288,12 @@ function createEndGameBlock(){
 	parEnd2.innerText = "Ваш счет: ";
 	// добаляем в блок игры
 	endBlock.appendChild(parEnd2);
+	var record = document.createElement("p");
+  // пишем внутри текст
+	checkMaxScore();
+	record.innerText = "Рекорд: " + maxScore;
+  // добаляем в блок игры
+	endBlock.appendChild(record);
 	// делаем спан для счета
 	var endScore = document.createElement("span");
 	// присваиваем количество набраных очков
@@ -319,7 +325,7 @@ function musicOn(song){
 	// зацикливаем музыку
 	audio.setAttribute("loop", "true");
 	// громкость звука
-	audio.volume = 0.2;
+	audio.volume = 0.15;
 	// проверка глобальной перемннной, выключил ли пользователь звук? если да
 	if(varSoung == "on"){
 		// проигрываем песню
