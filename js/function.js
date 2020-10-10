@@ -71,6 +71,9 @@ function createRules(){
 	var par5 = document.createElement("p");
 	par5.innerText = "Игра заканчивается если уронить 3 яйца или по окончанию таймера.";
 	information.appendChild(par5);
+	var par6 = document.createElement("p");
+	par6.innerText = "Пробел - это ПАУЗА. На паузе дособерите яица.";
+	information.appendChild(par6);
 }
 
 // функиця для создания блока включения и выключения звука
@@ -276,7 +279,7 @@ function createEndGameBlock(){
 	// создаем  надпись о конце игры
 	var parEnd = document.createElement("p");
 	// пишем внутренний текст
-	parEnd.innerText = "Игра окончна!"
+	parEnd.innerText = "Игра окончена!"
 	// доавляем в блок конца игры
 	endBlock.appendChild(parEnd);
 	// создаем надспись со счетом
@@ -368,42 +371,53 @@ function musicOff(){
 function checkKey(e) {
 	// считываем событие
 	e = e || window.event;
+	// пробел - пауза
+	if (e.keyCode == '32') {
+		if(pause == 0) {
+			pause = 1;
+			createPause();
+		}else{
+			pause = 0;
+			startPause();
+			deletePause();
+		}
+	}
 	// кнопка на клаве номер 38 (вверх)
 	if (e.keyCode == '38') {
 		// up arrow
 		// если волк слева внизу
 		if(wolf.className == "wolf-left-bottom"){
 			// поднимаем его слева вверх
-		wolfLeftTop();
+			wolfLeftTop();
 		// если он справа внизу
-		}else if(wolf.className == "wolf-right-bottom"){
+	}else if(wolf.className == "wolf-right-bottom"){
 			// перемещаем его справа вверх
-		wolfRightTop();
+			wolfRightTop();
 		}
 	}
 	// аналогично остальное
 	else if (e.keyCode == '40') {
 		// down arrow
 		if(wolf.className == "wolf-left-top"){
-		wolfLeftBottom();
+			wolfLeftBottom();
 		}else if(wolf.className == "wolf-right-top"){
-		wolfRightBottom();
+			wolfRightBottom();
 		}
 	}
 	else if (e.keyCode == '37') {
 		// left arrow
 		if(wolf.className == "wolf-right-top"){
-		wolfLeftTop();
+			wolfLeftTop();
 		}else if(wolf.className == "wolf-right-bottom"){
-		wolfLeftBottom();
+			wolfLeftBottom();
 		}
 	}
 	else if (e.keyCode == '39') {
 		// right arrow
 		if(wolf.className == "wolf-left-top"){
-		wolfRightTop();
+			wolfRightTop();
 		}else if(wolf.className == "wolf-left-bottom"){
-		wolfRightBottom();
+			wolfRightBottom();
 		}
 	}
 }
@@ -451,6 +465,8 @@ function deleteScore(){
 function deleteTimer(){
 	// удаляем весь блок с таймером
 	timer.remove();
+	clearInterval(timerBall);			// очищаем таймер анимации яиц
+	clearTimeout(timerEgg);				// очищаем таймер создания яиц
 }
 
 // функция удаления блока жизней
@@ -490,14 +506,27 @@ function recountVariables(){
 	// жизни 3
 	quantityLifes = 3;
 	// обнуляем скорость
-	speedEgg = 200;
-	pxLeft = 410;
-	pxRight = 550;
-	pxLeftCreate = 400;
-	pxRightCreate = 570;
+	speedAnimal = 200;	// переменная времени в мсек. интервала для функции анимации яиц
+	speedEgg = 3000;	// переменная интервала для создания яиц
+	// pxLeft = 410;
+	// pxRight = 550;
+	// pxLeftCreate = 400;
+	// pxRightCreate = 570;
 }
 
 // фцнкция обнуления поля.
 function gameFild(){
 	game.innerHTML = "";
+}
+
+//функция создания паузы. аналогична созданию других элементов
+function createPause(){
+	pauseBlock = document.createElement("div");
+	pauseBlock.className = "pause";
+	pauseBlock.innerText = "ПАУЗА";
+	game.appendChild(pauseBlock);
+}
+// фцнкция даления паузы
+function deletePause(){
+	pauseBlock.remove();
 }

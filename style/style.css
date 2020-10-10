@@ -506,3 +506,12 @@ body{
 	left: 450px;
 	background: url('../img/live.svg') 0px 0px /cover no-repeat;
 }
+.pause{
+	color: red;
+	-webkit-text-stroke: 1px #000000;
+	font-size: 40px;
+	letter-spacing: 2px;
+	position: absolute;
+	bottom: 2px;
+	left: 430px;
+}
