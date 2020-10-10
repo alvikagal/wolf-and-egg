@@ -36,7 +36,7 @@ input,button,textarea{font-family:inherit;}
 
 /* Особенности в разных браузерах. Крестик в инпутах. Отступы конопок. И обнуление списков */
 input::-ms-clear{display: none;}
-button{cursor: pointer;}
+/* button{cursor: url('../img/cursor.png') 32 32, pointer;} */
 button::-moz-focus-inner {padding:0;border:0;}
 a, a:visited{text-decoration: none;}
 a:hover{text-decoration: none;}
@@ -106,8 +106,8 @@ body{
 	background: 
 		url(../img/rabit-look.png) right 250px/ 30% no-repeat, 
 		url(../img/wolf.png) 60px 140px/ 25% no-repeat, 
-		url(../img/title.png) center 50px/ 50% no-repeat, 
-	 rgba(0, 0, 0, 0.6);
+		url(../img/title.png) center 50px/ 50% no-repeat,
+		rgba(0, 0, 0, 0.6);
 }
 
 /* Стили для кнопки начала и конца */
@@ -180,7 +180,7 @@ body{
 	background: 
 		url(../img/rabit-shok.png) right 200px/ 30% no-repeat, 
 		url(../img/rabit-lagh.png) 50px 190px/ 30% no-repeat, 
-	 rgba(0, 0, 0, 0.6);
+		rgba(0, 0, 0, 0.6);
 }
 
 /* Изменяем отступ для кнопки рестарта */
@@ -228,8 +228,7 @@ body{
 	border-radius: 0 0 13px 0;
 	letter-spacing: 2px;
 	padding: 35px 15px 15px;
-	width: 250px;
-	text-align: justify;
+	width: 300px;
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -342,7 +341,6 @@ body{
 	height: 100%;
 }
 #hens > div{
-	/* border: 1px solid red; */
 	position: absolute;
 	width: 50%;
 	height: 50%;
@@ -352,10 +350,12 @@ body{
 #left-top{
 	left: 0;
 	top: 0;
+	background: url(../img/seno.png) -18px 99px/ 35% no-repeat, url(../img/seno.png) -18px 230px/ 35% no-repeat;
 }
 #right-top{
 	right: 0;
 	top: 0;
+	background: url(../img/seno.png) 328px 99px/ 35% no-repeat, url(../img/seno.png) 328px 230px/ 35% no-repeat;
 }
 #left-bottom{
 	left: 0;
@@ -456,34 +456,28 @@ body{
 #egg{
 	position: absolute;
 	width: 25px;
-  	height: 40px;
-  	-webkit-box-shadow: inset 0px -20px 30px -15px rgb(253, 212, 30);
-	-moz-box-shadow: inset 0px -20px 30px -15px rgb(253, 212, 30);
-	box-shadow: inset 0px -20px 30px -15px rgb(253, 212, 30);
-	border: 1px solid #f7a000;
+	height: 40px;
 	background: #fff;
 	border-radius: 50%;
+	box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
+	border: 1px solid  rgb(223, 15, 15);
 }
 /* Позиционируем яйца */
 .egg-left-top{
-    top: 130px;
-    left: 220px;
-    transform: rotate(0deg);
+   top: 130px;
+   left: 220px;
 }
 .egg-left-bottom{
-    top: 260px;
-    left: 220px;
-    transform: rotate(0deg);
+   top: 260px;
+   left: 220px;
 }
 .egg-right-top{
-    top: 130px;
-    left: 750px;
-    transform: rotate(720deg);
+   top: 130px;
+   left: 750px;
 }
 .egg-right-bottom{
-    top: 260px;
-    left: 750px;
-    transform: rotate(720deg);
+   top: 260px;
+   left: 750px;
 }
 /* стили для разбитого яйца */
 .broken-egg-left{
@@ -511,50 +505,4 @@ body{
 	top: 50px;
 	left: 450px;
 	background: url('../img/live.svg') 0px 0px /cover no-repeat;
-}
-/* стили для разбитого яйца */
-#fallEgg{
-	position: absolute;
-	width: 25px;
-  	height: 40px;
-  	-webkit-box-shadow: inset 0px -20px 30px -15px rgb(253, 212, 30);
-	-moz-box-shadow: inset 0px -20px 30px -15px rgb(253, 212, 30);
-	box-shadow: inset 0px -20px 30px -15px rgb(253, 212, 30);
-	border: 1px solid #f7a000;
-	background: #fff;
-	border-radius: 50%;
-}
-.broken-egg{
-	position: absolute;
-	width: 55px;
-	height: 48px;
-  	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	border: none;
-	background: url('../img/dead.png') 0px 0px /cover no-repeat;
-	border-radius: none;
-	z-index: 6;
-}
-.egg-green{
-	position: absolute;
-	width: 25px;
-  	height: 40px;
-  	-webkit-box-shadow: inset 0px -20px 30px -15px  rgb(50, 223, 15);
-	-moz-box-shadow: inset 0px -20px 30px -15px  rgb(50, 223, 15);
-	box-shadow: inset 0px -20px 30px -15px  rgb(50, 223, 15);
-	border: 1px solid  rgb(50, 223, 15);
-	background: #fff;
-	border-radius: 50%;
-}
-.egg-green{
-	position: absolute;
-	width: 25px;
-  	height: 40px;
-  	-webkit-box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
-	-moz-box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
-	box-shadow: inset 0px -20px 30px -15px  rgb(223, 15, 15);
-	border: 1px solid  rgb(223, 15, 15);
-	background: #fff;
-	border-radius: 50%;
 }

@@ -60,14 +60,17 @@ function createRules(){
 	// создаем пправила игры 1-3
 	var par1 = document.createElement("p");
 	// добавляем каждое правила в блк правил
-	par1.innerText = "Волк должен ловит яйца.";
+	par1.innerText = "Волк должен ловить яица.";
 	information.appendChild(par1);
-	var par2 = document.createElement("p");
-	par2.innerText = "Чем больше яиц поймано, тем больше очков.";
-	information.appendChild(par2);
 	var par3 = document.createElement("p");
-	par3.innerText = "Игра заканчивается если уронить 3 яйца или по окончанию таймера.";
+	par3.innerText = "Каждые 20 очков прибавляется 1 жизнь, а каждые 50 уменьшается скорость.";
 	information.appendChild(par3);
+	var par4 = document.createElement("p");
+	par3.innerText = "Желтые яица прибавляют 1 очко, зеленые - прибавляет 5 секунд к таймеру, красные - отнимают 1 жизнь.";
+	information.appendChild(par3);
+	var par5 = document.createElement("p");
+	par5.innerText = "Игра заканчивается если уронить 3 яйца или по окончанию таймера.";
+	information.appendChild(par5);
 }
 
 // функиця для создания блока включения и выключения звука
@@ -118,7 +121,7 @@ function createTimer(){
 	// создаем спан в отором будет счетчик
 	time = document.createElement("span");
 	// помещаем внутрь тестов е время
-	time.innerText = "120";
+	time.innerText = "60";
 	// даем блоку идентификатор
 	time.id = "time";
 	// добавляем спан с таймером внутрь блока таймер
@@ -134,6 +137,9 @@ function createLifes(){
 	// добавляем блок жизней в игру
 	game.prepend(life);
 	// делаем цикл для создания количества жизней
+	if(quantityLifes == 0){
+		gameEnd();
+	}
 	for(let i = 0; i < quantityLifes; i++){
 		// слздаем локальную переменную в которую помещаем жизнь
 		var lifeImage = document.createElement("img");
@@ -307,7 +313,7 @@ function musicOn(song){
 	audio.src = song; 
 	// Автоматически запускаем
 	audio.setAttribute("autoplay", "true");
-		// зацикливаем музыку
+	// зацикливаем музыку
 	audio.setAttribute("loop", "true");
 	// громкость звука
 	audio.volume = 0.2;
