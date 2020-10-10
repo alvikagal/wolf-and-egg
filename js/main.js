@@ -29,7 +29,7 @@ function createGame(){
 	// создаем блок куриц
 	createHens();
 	// запускаем таймер
-	// startInterval();
+	startTimer();
 
 	randomPozition();
 	// считываем кнопки с клавы (при нажатии на клавишу вызыем функцию)
