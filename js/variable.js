@@ -38,7 +38,7 @@ var endBlock = null;
 // глобальная переменная для кнопки рестарта
 var restartBtn = null;
 // глобальная переменная, для включеного или выключеного звука
-var 	varSoung = "on";
+var varSoung = "on";
 // переменная для блока паузы
 var pauseBlock = null;
 
@@ -59,3 +59,4 @@ var sound = new Audio('audio/egg.mp3');		// звук падения яйца
 var pause = 0;								// переменная для паузы
 var timerEgg = null;						// интервал создания яиц
 var timerBall = null;						// интервал анимации яиц
+var maxScore = 0;

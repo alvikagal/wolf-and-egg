@@ -84,7 +84,7 @@ function createBall(pozEgg, colorEgg) {
 	        ball.style.left = ball.offsetLeft - 10 + "px"; 				//слева на 10px
 	        total -= 45; 												// поворот влево
 	        ball.style.transform = "rotate(" + total + "deg)"; 			// применяем к стилю поворот яйца
-	    }
+		}
 		// проверяем дошло ли яйцо до края
 		if ((ball.offsetLeft >= pxLeft && ball.offsetLeft <= pxLeft + 10) 
 			|| (ball.offsetLeft >= pxRight && ball.offsetLeft <= pxRight + 10)) {
@@ -94,7 +94,7 @@ function createBall(pozEgg, colorEgg) {
 				|| (wolf.className == "wolf-right-top" && ball.className == "egg-right-top")
 				|| (wolf.className == "wolf-right-bottom" && ball.className == "egg-right-bottom")) {
 					music.play();	// при ловле яйца, воспроизводим звук
-					music.volume = 0.5;	// громкость этого звука, половина
+					music.volume = 0.7;	// громкость этого звука, половина
 					switch(colorEgg) {							// назначаем цвет яйца - рандомный
 						case 1: 	//yellow
 						gameScore++;	// прибавляем очки
@@ -198,7 +198,7 @@ function scoreLifes() {
 function crashEgg(side) {
 	let step = 0;									// переменная для эффекта прыжка цыпленка
 	sound.play();	// при ловле яйца, воспроизводим звук
-	sound.volume = 0.5;	// громкость этого звука, половина
+	sound.volume = 0.3;	// громкость этого звука, половина
 	var broken = document.createElement("div"); 	//создаем блок div
 	broken.className = side;						// присваиваем класс
 	game.appendChild(broken);						//добавляем елемент цыпленок в игровое поле
@@ -218,14 +218,20 @@ function crashEgg(side) {
 			}else{
         		clearInterval(timerBroken);							// очищаем таймер создания яиц
         		broken.remove();									// удаляем элеммент цыпленка
-        	}
+			}
       }else{														// если цыпленок слева, 
         	if(broken.offsetLeft < 1000){							// бежит за границу правого поля игры
 				broken.style.left = broken.offsetLeft + 8 + "px";	// шаг 8px
 			}else{
         		clearInterval(timerBroken);							// очищаем таймер создания яиц
         		broken.remove();									// удаляем элеммент цыпленка
-        	}
-        }
-    }, 70)
+			}
+		}
+	}, 70)
+}
+
+function checkMaxScore(){
+	if(gameScore > maxScore){
+		maxScore = gameScore;
+	}
 }

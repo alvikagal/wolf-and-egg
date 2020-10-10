@@ -176,7 +176,7 @@ body{
 	left: 0;
 	width: 100%;
 	height: 100%;
-	padding: 100px 0px 0px 0px;
+	padding: 70px 0px 0px 0px;
 	background: 
 		url(../img/rabit-shok.png) right 200px/ 30% no-repeat, 
 		url(../img/rabit-lagh.png) 50px 190px/ 30% no-repeat, 
@@ -185,7 +185,7 @@ body{
 
 /* Изменяем отступ для кнопки рестарта */
 #restart-btn{
-	margin: 110px auto 0px;
+	margin: 70px auto 0px;
 }
 
 /* Изменяем текст вывода коцна игры */
