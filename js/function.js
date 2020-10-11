@@ -75,7 +75,7 @@ function createRules(){
 	par6.innerText = "Пробел - это ПАУЗА. На паузе дособерите яица.";
 	information.appendChild(par6);
 	var par7 = document.createElement("p");
-	par7.innerText = "Над игрой работали: Александр Агалаков, Юлия Кавицкая, Павел Лахтин.";
+	par7.innerText = "Над игрой работала команда \"ЛЮТОВОЛКИ\": Александр Агалаков - капитан команды, Юлия Кавицкая - автор идеи, Павел Лахтин - тестировщик.";
 	information.appendChild(par7);
 }
 
