@@ -74,6 +74,9 @@ function createRules(){
 	var par6 = document.createElement("p");
 	par6.innerText = "Пробел - это ПАУЗА. На паузе дособерите яица.";
 	information.appendChild(par6);
+	var par7 = document.createElement("p");
+	par7.innerText = "Над игрой работали: Александр Агалаков, Юлия Кавицкая, Павел Лахтин.";
+	information.appendChild(par7);
 }
 
 // функиця для создания блока включения и выключения звука
