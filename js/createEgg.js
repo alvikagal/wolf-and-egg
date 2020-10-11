@@ -1,8 +1,16 @@
-// случайное число до max
-function random(max) {
-	var rand = Math.random() * (max + 1); 
-	rand = Math.floor(rand+1);	//округление до целого числа
-	return rand;	//возврат случайного целого числа
+// интервал создания яиц
+function startPause(){
+	timerEgg = setTimeout(function() {
+		if(pause == 0) { // если нет паузы, то
+			randomPozition();  //создаем яйцо
+			if(speedEgg > 900){ // уменьшаем интервал между яицами
+				speedEgg = speedEgg - 100;	
+			}
+			if(speedAnimal > 80){ // увеличиваем скорость анимации яиц
+				speedAnimal = speedAnimal - 2;	
+			}
+		}
+	}, speedEgg);	// временной интервал
 }
 
 //выбор позиции яйца и цвета
@@ -27,19 +35,11 @@ function randomPozition() {
 	}	
 }
 
-// интервал создания яиц
-function startPause(){
-	timerEgg = setTimeout(function() {
-		if(pause == 0) { // если нет паузы, то
-			randomPozition();  //создаем яйцо
-			if(speedEgg > 900){ // уменьшаем интервал между яицами
-				speedEgg = speedEgg - 100;	
-			}
-			if(speedAnimal > 80){ // увеличиваем скорость анимации яиц
-				speedAnimal = speedAnimal - 2;	
-			}
-		}
-	}, speedEgg);	// временной интервал
+// случайное число до max
+function random(max) {
+	var rand = Math.random() * (max + 1); 
+	rand = Math.floor(rand+1);	//округление до целого числа
+	return rand;	//возврат случайного целого числа
 }
 
 // создаем яица
@@ -49,7 +49,8 @@ function createBall(pozEgg, colorEgg) {
 	var ball = document.createElement("div");	// переменная для создания блока div
 	ball.id = "egg";							// присваиваем id
 	ball.className = pozEgg;					// добавляем тегу div => класс
-	switch(colorEgg) {							// назначаем цвет яйца - рандомный
+	// назначаем цвет яйца - рандомный
+	switch(colorEgg) {							
 		case 1: 	//yellow
 		ball.style.boxShadow = "inset 0px -20px 30px -15px rgb(253, 212, 30)";
 		ball.style.border = "1px solid #f7a000";
@@ -154,6 +155,42 @@ function fall(egg){
 	}, 3);
 }
 
+// функци анимации когда цыпленок убегает
+function crashEgg(side) {
+	let step = 0;									// переменная для эффекта прыжка цыпленка
+	sound.play();	// при ловле яйца, воспроизводим звук
+	sound.volume = 0.3;	// громкость этого звука, половина
+	var broken = document.createElement("div"); 	//создаем блок div
+	broken.className = side;						// присваиваем класс
+	game.appendChild(broken);						//добавляем елемент цыпленок в игровое поле
+	//=====================
+	// с помощью функции интервала создаем анимацию убегания цыпленка
+	var timerBroken = setInterval(function() {
+		if(step == 1){		
+			broken.style.top = broken.offsetTop + 2 + "px"; //ввех на 2px
+			step = 2;
+		}else{
+			broken.style.top = broken.offsetTop - 2 + "px"; //вниз на 2px
+			step = 1;
+		}	
+		if(broken.className == "broken-egg-left"){ 				// если цыпленок слева, 
+			if (broken.offsetLeft > -41){							// бежит за границу левого поля игры
+				broken.style.left = broken.offsetLeft - 8 + "px";	// шаг 8px	
+			}else{
+        		clearInterval(timerBroken);							// очищаем таймер создания яиц
+        		broken.remove();									// удаляем элеммент цыпленка
+        	}
+      }else{														// если цыпленок слева, 
+        	if(broken.offsetLeft < 1000){							// бежит за границу правого поля игры
+				broken.style.left = broken.offsetLeft + 8 + "px";	// шаг 8px
+			}else{
+        		clearInterval(timerBroken);							// очищаем таймер создания яиц
+        		broken.remove();									// удаляем элеммент цыпленка
+        	}
+        }
+    }, 70)
+}
+
 // функция анимация добавления жизни
 function addLifes() {
 	var chicken = document.createElement("div"); 	//создаем блок div
@@ -192,42 +229,6 @@ function scoreLifes() {
 		speedAnimal = 200;	// переменная времени в мсек. интервала для функции анимации яиц
 		speedEgg = 1500;	// переменная интервала для создания яиц
 	}
-}
-
-// функци анимации когда цыпленок убегает
-function crashEgg(side) {
-	let step = 0;									// переменная для эффекта прыжка цыпленка
-	sound.play();	// при ловле яйца, воспроизводим звук
-	sound.volume = 0.3;	// громкость этого звука, половина
-	var broken = document.createElement("div"); 	//создаем блок div
-	broken.className = side;						// присваиваем класс
-	game.appendChild(broken);						//добавляем елемент цыпленок в игровое поле
-	//=====================
-	// с помощью функции интервала создаем анимацию убегания цыпленка
-	var timerBroken = setInterval(function() {
-		if(step == 1){		
-			broken.style.top = broken.offsetTop + 2 + "px"; //ввех на 2px
-			step = 2;
-		}else{
-			broken.style.top = broken.offsetTop - 2 + "px"; //вниз на 2px
-			step = 1;
-		}	
-		if(broken.className == "broken-egg-left"){ 				// если цыпленок слева, 
-			if (broken.offsetLeft > -41){							// бежит за границу левого поля игры
-				broken.style.left = broken.offsetLeft - 8 + "px";	// шаг 8px	
-			}else{
-        		clearInterval(timerBroken);							// очищаем таймер создания яиц
-        		broken.remove();									// удаляем элеммент цыпленка
-        	}
-      }else{														// если цыпленок слева, 
-        	if(broken.offsetLeft < 1000){							// бежит за границу правого поля игры
-				broken.style.left = broken.offsetLeft + 8 + "px";	// шаг 8px
-			}else{
-        		clearInterval(timerBroken);							// очищаем таймер создания яиц
-        		broken.remove();									// удаляем элеммент цыпленка
-        	}
-        }
-    }, 70)
 }
 
 function checkMaxScore(){
