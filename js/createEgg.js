@@ -84,7 +84,7 @@ function createBall(pozEgg, colorEgg) {
 	        ball.style.left = ball.offsetLeft - 10 + "px"; 				//слева на 10px
 	        total -= 45; 												// поворот влево
 	        ball.style.transform = "rotate(" + total + "deg)"; 			// применяем к стилю поворот яйца
-		}
+	    }
 		// проверяем дошло ли яйцо до края
 		if ((ball.offsetLeft >= pxLeft && ball.offsetLeft <= pxLeft + 10) 
 			|| (ball.offsetLeft >= pxRight && ball.offsetLeft <= pxRight + 10)) {
@@ -173,6 +173,8 @@ function addLifes() {
 			if(chicken.offsetTop > 15){
 				chicken.style.top = chicken.offsetTop - 2 + "px"; // сверху на 3px
 			}else{
+				deleteLifes();		// функция удаления блока жизней
+				createLifes();		// функция создания блока жизней
 				clearInterval(timerChicken);	// очищаем таймер создания яиц
 				chicken.remove();				// удаляем блок с цыпленком для жизни
 			}
@@ -180,13 +182,11 @@ function addLifes() {
 	}, 10)	// временной интервал 
 }
 
-// каждые 50 очков прибавляем жизнь и замедляем
+// каждые 20 очков прибавляем жизнь и при 50 замедляем скорость
 function scoreLifes() {
 	if(gameScore % 20 == 0 && gameScore != 0){	// если досчитали до 20, то:
 		quantityLifes++;	// прибавляем жизнь
-		addLifes();			// функция анимация добавления жизни 
-		deleteLifes();		// функция удаления блока жизней
-		createLifes();		// функция создания блока жизней	
+		addLifes();			// функция анимация добавления жизни 	
 	}else if(gameScore % 50 == 0 && gameScore != 0){ //если счет кратный 50
 		// замедляем скорость появления яиц с помощью временного интервала
 		speedAnimal = 200;	// переменная времени в мсек. интервала для функции анимации яиц
@@ -218,16 +218,16 @@ function crashEgg(side) {
 			}else{
         		clearInterval(timerBroken);							// очищаем таймер создания яиц
         		broken.remove();									// удаляем элеммент цыпленка
-			}
+        	}
       }else{														// если цыпленок слева, 
         	if(broken.offsetLeft < 1000){							// бежит за границу правого поля игры
 				broken.style.left = broken.offsetLeft + 8 + "px";	// шаг 8px
 			}else{
         		clearInterval(timerBroken);							// очищаем таймер создания яиц
         		broken.remove();									// удаляем элеммент цыпленка
-			}
-		}
-	}, 70)
+        	}
+        }
+    }, 70)
 }
 
 function checkMaxScore(){
