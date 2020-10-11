@@ -99,6 +99,8 @@ function createBall(pozEgg, colorEgg) {
 					switch(colorEgg) {							// назначаем цвет яйца - рандомный
 						case 1: 	//yellow
 						gameScore++;	// прибавляем очки
+						score.innerText = gameScore;	// выводим на экран
+						scoreLifes();	// тут увеличиваем жизни
 						break;
 
 						case 2: 	//green
@@ -114,8 +116,6 @@ function createBall(pozEgg, colorEgg) {
 						default:
 						break;
 					}
-				score.innerText = gameScore;	// выводим на экран
-				scoreLifes();	// тут увеличиваем жизни
 				ball.remove();	//удаляем яйцо
 			}else {	// если нет корзинки возле яйца, то убираем одну жизнь
 				//======
