@@ -41,6 +41,8 @@ var restartBtn = null;
 var varSoung = "on";
 // переменная для блока паузы
 var pauseBlock = null;
+// переменная для блока таймера
+var t = null;
 
 //===================
 // переменные для creatEgg

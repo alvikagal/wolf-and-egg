@@ -81,14 +81,12 @@ function restartGame(){
 // запуск таймера
 function startTimer(){
 	// запускаем интервал в 1 сек
-	var t = setInterval(function(){
+	t = setInterval(function(){
 		if(pause == 0) {
 			// отнимем 1 каждую секунду
 			time.innerText -= 1;
 			// если время 0, вызываем конец игры
 			if(time.innerText == 0){
-				// очищаем интервал
-				clearInterval(t);
 				// запуск коцна игры
 				gameEnd();
 			}
