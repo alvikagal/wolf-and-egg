@@ -518,10 +518,6 @@ function recountVariables(){
 	// обнуляем скорость
 	speedAnimal = 200;	// переменная времени в мсек. интервала для функции анимации яиц
 	speedEgg = 3000;	// переменная интервала для создания яиц
-	// pxLeft = 410;
-	// pxRight = 550;
-	// pxLeftCreate = 400;
-	// pxRightCreate = 570;
 }
 
 // фцнкция обнуления поля.
@@ -539,4 +535,12 @@ function createPause(){
 // фцнкция даления паузы
 function deletePause(){
 	pauseBlock.remove();
+}
+
+// функция закрытия правил если они отрыты
+function checkOpenRules(){
+	// ищем подстроку в ссылке, если она найдена, убираем правила
+	if(location.href.indexOf("#info") != -1){
+		location.href = "index.html#";
+	}
 }

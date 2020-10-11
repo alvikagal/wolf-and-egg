@@ -14,6 +14,8 @@ function start(){
 
 // функция старта игры
 function createGame(){
+	// проверяем открыты ли правила, если да, закрываем
+	checkOpenRules();
 	// запускаем музыку игры
 	musicOn("audio/pole.mp3");
 	// удаляем блок начала игры
@@ -68,6 +70,8 @@ function gameEnd(){
 function restartGame(){
 	// выключаем музыку конца
 	musicOff();
+	// проверяем открыты ли правила, если да, закрываем
+	checkOpenRules();
 	// удаляем блок конца
 	deleteEndGameBlock();
 	// обнуляем переменные
