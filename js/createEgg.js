@@ -85,7 +85,7 @@ function createBall(pozEgg, colorEgg) {
 	        ball.style.left = ball.offsetLeft - 10 + "px"; 				//слева на 10px
 	        total -= 45; 												// поворот влево
 	        ball.style.transform = "rotate(" + total + "deg)"; 			// применяем к стилю поворот яйца
-	    }
+		}
 		// проверяем дошло ли яйцо до края
 		if ((ball.offsetLeft >= pxLeft && ball.offsetLeft <= pxLeft + 10) 
 			|| (ball.offsetLeft >= pxRight && ball.offsetLeft <= pxRight + 10)) {
@@ -128,7 +128,6 @@ function createBall(pozEgg, colorEgg) {
 				fall(ball);
 				
 		}	// после того как яйцо дошло до края - удаляем его
-
 			//=====================
 		}
 	}, speedAnimal);	// переменная времени интервала
@@ -166,6 +165,9 @@ function crashEgg(side) {
 	//=====================
 	// с помощью функции интервала создаем анимацию убегания цыпленка
 	var timerBroken = setInterval(function() {
+		if(quantityLifes == 0){
+			broken.remove();								// удаляем элеммент цыпленка
+		}
 		if(step == 1){		
 			broken.style.top = broken.offsetTop + 2 + "px"; //ввех на 2px
 			step = 2;
@@ -179,16 +181,16 @@ function crashEgg(side) {
 			}else{
         		clearInterval(timerBroken);							// очищаем таймер создания яиц
         		broken.remove();									// удаляем элеммент цыпленка
-        	}
+			}
       }else{														// если цыпленок слева, 
         	if(broken.offsetLeft < 1000){							// бежит за границу правого поля игры
 				broken.style.left = broken.offsetLeft + 8 + "px";	// шаг 8px
 			}else{
         		clearInterval(timerBroken);							// очищаем таймер создания яиц
         		broken.remove();									// удаляем элеммент цыпленка
-        	}
-        }
-    }, 70)
+			}
+		}
+	}, 70)
 }
 
 // функция анимация добавления жизни
